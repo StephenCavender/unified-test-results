@@ -1,5 +1,6 @@
 node('ait') {
   try {
+    checkout scm
     stage('Build') {
       docker.image('node:10').inside {
         sh 'npm install && npm run build'
