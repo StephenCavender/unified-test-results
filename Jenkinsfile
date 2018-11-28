@@ -10,8 +10,8 @@ node('ait') {
     stage('Deploy') {
       if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
         name = 'unified-test-results'
-        sh "docker container stop $name"
-        docker.build("$name").run("--name $name -p 8080:80")
+        sh "docker container stop $name || true"
+        docker.build("$name").run("--name $name -p 80:80")
       }
     }
   } finally {
