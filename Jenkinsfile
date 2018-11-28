@@ -2,8 +2,11 @@ node('ait') {
   try {
     checkout scm
     stage('Build') {
-      docker.image('node:10').inside('sysctl -w net.ipv4.ip_forward=1') {
-        sh 'npm install && npm run build'
+      docker.image('node:10').inside {
+        sh '''
+          sysctl -w net.ipv4.ip_forward=1
+          npm install && npm run build
+        '''
       }
     }
 
